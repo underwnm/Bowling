@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace BowlingProject
 {
-    class Score : IComparable
+    public class TenthFrame : Frame
     {
-        public int CompareTo(object obj)
+        public TenthFrame(int firstThrow, int secondThrow) : base(firstThrow, secondThrow)
         {
-            throw new NotImplementedException();
         }
     }
 }
