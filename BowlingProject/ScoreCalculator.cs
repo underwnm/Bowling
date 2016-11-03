@@ -10,10 +10,10 @@ namespace BowlingProject
     {
         private Frame[] frames = new Frame[10];
         private int currentFrame;
+        public int score;
         private Frame lastFrame { get { return frames[currentFrame - 1]; } }
         private Frame twoFramesAgo { get { return frames[currentFrame - 2]; } }
-        public int score { get; private set; }
-        public void StartFrame(Frame frame)
+        public void GetFrameScore(Frame frame)
         {
             AddBonusToScore(frame);
             score += frame.total;
@@ -22,11 +22,17 @@ namespace BowlingProject
         private void AddBonusToScore(Frame frame)
         {
             if (CheckIfLastTwoFramesWereStrikes())
+            {
                 score += frame.total + frame.firstThrow;
+            }
             else if (CheckIfLastFrameWasAStrike())
+            {
                 score += frame.total;
+            }
             else if (CheckIfLastFrameWasASpare())
+            {
                 score += frame.firstThrow;
+            }
         }
         private bool CheckIfLastTwoFramesWereStrikes()
         {
