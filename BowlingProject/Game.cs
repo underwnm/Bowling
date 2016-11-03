@@ -10,8 +10,8 @@ namespace BowlingProject
     {
         private FileReader file;
         private ScoreCalculator score;
-        private Frame eachFrame;
-        private int currentFrame;
+        private Frame currentFrame;
+        private int frameNumber;
         private int firstThrow;
         private int secondThrow;
         private int thirdThrow;
@@ -28,13 +28,13 @@ namespace BowlingProject
             foreach (string game in games)
             {
                 score = new ScoreCalculator();
-                currentFrame = 1;
+                frameNumber = 1;
                 char[] scoringForTenFrames = game.ToCharArray();
                 for (int i = 0; i < scoringForTenFrames.Length; i++)
                 {
                     if (scoringForTenFrames[i] == 'X')
                     {
-                        if (currentFrame < 10)
+                        if (frameNumber < 10)
                         {
                             firstThrow = 10;
                             secondThrow = 0;
@@ -43,32 +43,39 @@ namespace BowlingProject
                         else
                         {
                             firstThrow = 10;
-                            GetSecondThrow(scoringForTenFrames[i]);
-                            i++;
-                            GetThirdThrow(scoringForTenFrames[i]);
-                            i++;
+                            GetSecondThrow(scoringForTenFrames[i+1]);
+                            GetThirdThrow(scoringForTenFrames[i+2]);
+                            i+=2;
                         }
                     }
                     else
                     {
-                        if (currentFrame < 10)
+                        if (frameNumber < 10)
                         {
                             firstThrow = Convert.ToInt16(scoringForTenFrames[i].ToString());
-                            i++;
-                            GetSecondThrow(scoringForTenFrames[i]);
-                            i++;
+                            GetSecondThrow(scoringForTenFrames[i+1]);
+                            i+=2;
                         }
                         else
                         {
-                            GetThirdThrow(scoringForTenFrames[i]);
-                            i++;
+                            firstThrow = Convert.ToInt16(scoringForTenFrames[i].ToString());
+                            GetSecondThrow(scoringForTenFrames[i+1]);
+                            try
+                            {
+                                GetThirdThrow(scoringForTenFrames[i + 2]);
+                            }
+                            catch
+                            {
+                                thirdThrow = 0;
+                            }
+                            i+=2;
                         }
                     }
-                    if (currentFrame < 10)
+                    if (frameNumber < 10)
                     {
-                        eachFrame = new Frame(firstThrow, secondThrow);
-                        score.GetFrameScore(eachFrame);
-                        currentFrame++;
+                        currentFrame = new Frame(firstThrow, secondThrow);
+                        score.GetFrameScore(currentFrame);
+                        frameNumber++;
                     }
                     else
                     {
