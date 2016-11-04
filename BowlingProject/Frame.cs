@@ -8,7 +8,7 @@ namespace BowlingProject
 {
     public class Frame
     {
-        public int maxPins = 10;
+        private int maxPins = 10;
         public int firstThrow;
         public int secondThrow;
         public virtual int total { get { return firstThrow + secondThrow; } }

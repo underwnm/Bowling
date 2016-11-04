@@ -103,13 +103,9 @@ namespace BowlingProject
                 secondThrow = Convert.ToInt16(frame.ToString());
             }
         }
-        private void GetThirdThrow(char? frame)
+        private void GetThirdThrow(char frame)
         {
-            if (frame == null)
-            {
-                thirdThrow = 0;
-            }
-            else if (frame == 'X')
+            if (frame == 'X')
             {
                 thirdThrow = 10;
             }
