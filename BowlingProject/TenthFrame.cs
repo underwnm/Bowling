@@ -8,7 +8,7 @@ namespace BowlingProject
 {
     public class TenthFrame : Frame
     {
-        public int thirdThrow { get; private set; }
+        public int thirdThrow;
         public override int total { get { return base.firstThrow + base.secondThrow + thirdThrow; } }
         public TenthFrame(int firstThrow, int secondThrow, int thirdThrow) : base(firstThrow, secondThrow)
         {

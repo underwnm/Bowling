@@ -8,9 +8,10 @@ namespace BowlingProject
 {
     class ScoreCalculator
     {
-        private Frame[] frames = new Frame[10];
-        private int currentFrame;
         public int score;
+        private int currentFrame;
+        private Frame[] frames = new Frame[10];
+        private Frame strike = new Frame(10, 0);
         private Frame lastFrame { get { return frames[currentFrame - 1]; } }
         private Frame twoFramesAgo { get { return frames[currentFrame - 2]; } }
         public void GetFrameScore(Frame frame)
@@ -18,6 +19,32 @@ namespace BowlingProject
             AddBonusToScore(frame);
             score += frame.total;
             frames[currentFrame++] = frame;
+        }
+        public void GetTenthFrameScore(TenthFrame frame)
+        {
+            if (frame.firstThrow == 10)
+            {
+                AddBonusToScore(strike);
+                if (frame.secondThrow == 10)
+                {
+                    AddBonusToScore(strike);
+                }
+                else
+                {
+                    Frame bonus = new Frame(frame.secondThrow, frame.thirdThrow);
+                    AddBonusToScore(bonus);
+                }
+                if (frame.thirdThrow == 10)
+                {
+                    AddBonusToScore(strike);
+                }
+            }
+            else
+            {
+                AddBonusToScore(frame);
+                score += frame.total;
+                frames[currentFrame++] = frame;
+            }
         }
         private void AddBonusToScore(Frame frame)
         {

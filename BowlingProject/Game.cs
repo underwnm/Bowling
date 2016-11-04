@@ -19,7 +19,7 @@ namespace BowlingProject
         private string[] games;
         public Game()
         {
-            textFile = "//Mac/Home/Documents/Visual Studio 2015/Projects/BowlingProject/BowlingProject/scores.txt";
+            textFile = "scores.txt";
             file = new FileReader(textFile);
             games = file.ReadFromFile();
         }
@@ -79,8 +79,8 @@ namespace BowlingProject
                     }
                     else
                     {
-                        TenthFrame lastFrame = new TenthFrame(firstThrow, secondThrow, thirdThrow);
-                        score.GetFrameScore(lastFrame);
+                        TenthFrame tenthFrame = new TenthFrame(firstThrow, secondThrow, thirdThrow);
+                        score.GetTenthFrameScore(tenthFrame);
                     }
                 }
                 Console.WriteLine("Final Score: {0}", score.score);
